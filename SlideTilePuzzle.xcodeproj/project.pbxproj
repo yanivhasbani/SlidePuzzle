@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7988AC371F3DA6E700588CD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC361F3DA6E700588CD3 /* AppDelegate.swift */; };
+		7988AC391F3DA6E700588CD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC381F3DA6E700588CD3 /* ViewController.swift */; };
+		7988AC3C1F3DA6E700588CD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7988AC3A1F3DA6E700588CD3 /* Main.storyboard */; };
+		7988AC3E1F3DA6E700588CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7988AC3D1F3DA6E700588CD3 /* Assets.xcassets */; };
+		7988AC411F3DA6E700588CD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7988AC3F1F3DA6E700588CD3 /* LaunchScreen.storyboard */; };
+		7988AC4C1F3DA6E700588CD3 /* SlideTilePuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC4B1F3DA6E700588CD3 /* SlideTilePuzzleTests.swift */; };
+		7988AC571F3DA6E700588CD3 /* SlideTilePuzzleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC561F3DA6E700588CD3 /* SlideTilePuzzleUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7988AC481F3DA6E700588CD3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7988AC2B1F3DA6E700588CD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7988AC321F3DA6E700588CD3;
+			remoteInfo = SlideTilePuzzle;
+		};
+		7988AC531F3DA6E700588CD3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7988AC2B1F3DA6E700588CD3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7988AC321F3DA6E700588CD3;
+			remoteInfo = SlideTilePuzzle;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7988AC331F3DA6E700588CD3 /* SlideTilePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideTilePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7988AC361F3DA6E700588CD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7988AC381F3DA6E700588CD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7988AC3B1F3DA6E700588CD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7988AC3D1F3DA6E700588CD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7988AC401F3DA6E700588CD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7988AC421F3DA6E700588CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7988AC471F3DA6E700588CD3 /* SlideTilePuzzleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlideTilePuzzleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7988AC4B1F3DA6E700588CD3 /* SlideTilePuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTilePuzzleTests.swift; sourceTree = "<group>"; };
+		7988AC4D1F3DA6E700588CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7988AC521F3DA6E700588CD3 /* SlideTilePuzzleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlideTilePuzzleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7988AC561F3DA6E700588CD3 /* SlideTilePuzzleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTilePuzzleUITests.swift; sourceTree = "<group>"; };
+		7988AC581F3DA6E700588CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7988AC301F3DA6E700588CD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7988AC441F3DA6E700588CD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7988AC4F1F3DA6E700588CD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7988AC2A1F3DA6E700588CD3 = {
+			isa = PBXGroup;
+			children = (
+				7988AC351F3DA6E700588CD3 /* SlideTilePuzzle */,
+				7988AC4A1F3DA6E700588CD3 /* SlideTilePuzzleTests */,
+				7988AC551F3DA6E700588CD3 /* SlideTilePuzzleUITests */,
+				7988AC341F3DA6E700588CD3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7988AC341F3DA6E700588CD3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7988AC331F3DA6E700588CD3 /* SlideTilePuzzle.app */,
+				7988AC471F3DA6E700588CD3 /* SlideTilePuzzleTests.xctest */,
+				7988AC521F3DA6E700588CD3 /* SlideTilePuzzleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7988AC351F3DA6E700588CD3 /* SlideTilePuzzle */ = {
+			isa = PBXGroup;
+			children = (
+				7988AC361F3DA6E700588CD3 /* AppDelegate.swift */,
+				7988AC381F3DA6E700588CD3 /* ViewController.swift */,
+				7988AC3A1F3DA6E700588CD3 /* Main.storyboard */,
+				7988AC3D1F3DA6E700588CD3 /* Assets.xcassets */,
+				7988AC3F1F3DA6E700588CD3 /* LaunchScreen.storyboard */,
+				7988AC421F3DA6E700588CD3 /* Info.plist */,
+			);
+			path = SlideTilePuzzle;
+			sourceTree = "<group>";
+		};
+		7988AC4A1F3DA6E700588CD3 /* SlideTilePuzzleTests */ = {
+			isa = PBXGroup;
+			children = (
+				7988AC4B1F3DA6E700588CD3 /* SlideTilePuzzleTests.swift */,
+				7988AC4D1F3DA6E700588CD3 /* Info.plist */,
+			);
+			path = SlideTilePuzzleTests;
+			sourceTree = "<group>";
+		};
+		7988AC551F3DA6E700588CD3 /* SlideTilePuzzleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7988AC561F3DA6E700588CD3 /* SlideTilePuzzleUITests.swift */,
+				7988AC581F3DA6E700588CD3 /* Info.plist */,
+			);
+			path = SlideTilePuzzleUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7988AC321F3DA6E700588CD3 /* SlideTilePuzzle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7988AC5B1F3DA6E700588CD3 /* Build configuration list for PBXNativeTarget "SlideTilePuzzle" */;
+			buildPhases = (
+				7988AC2F1F3DA6E700588CD3 /* Sources */,
+				7988AC301F3DA6E700588CD3 /* Frameworks */,
+				7988AC311F3DA6E700588CD3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SlideTilePuzzle;
+			productName = SlideTilePuzzle;
+			productReference = 7988AC331F3DA6E700588CD3 /* SlideTilePuzzle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7988AC461F3DA6E700588CD3 /* SlideTilePuzzleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7988AC5E1F3DA6E700588CD3 /* Build configuration list for PBXNativeTarget "SlideTilePuzzleTests" */;
+			buildPhases = (
+				7988AC431F3DA6E700588CD3 /* Sources */,
+				7988AC441F3DA6E700588CD3 /* Frameworks */,
+				7988AC451F3DA6E700588CD3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7988AC491F3DA6E700588CD3 /* PBXTargetDependency */,
+			);
+			name = SlideTilePuzzleTests;
+			productName = SlideTilePuzzleTests;
+			productReference = 7988AC471F3DA6E700588CD3 /* SlideTilePuzzleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7988AC511F3DA6E700588CD3 /* SlideTilePuzzleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7988AC611F3DA6E700588CD3 /* Build configuration list for PBXNativeTarget "SlideTilePuzzleUITests" */;
+			buildPhases = (
+				7988AC4E1F3DA6E700588CD3 /* Sources */,
+				7988AC4F1F3DA6E700588CD3 /* Frameworks */,
+				7988AC501F3DA6E700588CD3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7988AC541F3DA6E700588CD3 /* PBXTargetDependency */,
+			);
+			name = SlideTilePuzzleUITests;
+			productName = SlideTilePuzzleUITests;
+			productReference = 7988AC521F3DA6E700588CD3 /* SlideTilePuzzleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7988AC2B1F3DA6E700588CD3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Yaniv;
+				TargetAttributes = {
+					7988AC321F3DA6E700588CD3 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 95GPBW627H;
+						ProvisioningStyle = Automatic;
+					};
+					7988AC461F3DA6E700588CD3 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 95GPBW627H;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7988AC321F3DA6E700588CD3;
+					};
+					7988AC511F3DA6E700588CD3 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 95GPBW627H;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7988AC321F3DA6E700588CD3;
+					};
+				};
+			};
+			buildConfigurationList = 7988AC2E1F3DA6E700588CD3 /* Build configuration list for PBXProject "SlideTilePuzzle" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7988AC2A1F3DA6E700588CD3;
+			productRefGroup = 7988AC341F3DA6E700588CD3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7988AC321F3DA6E700588CD3 /* SlideTilePuzzle */,
+				7988AC461F3DA6E700588CD3 /* SlideTilePuzzleTests */,
+				7988AC511F3DA6E700588CD3 /* SlideTilePuzzleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7988AC311F3DA6E700588CD3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7988AC411F3DA6E700588CD3 /* LaunchScreen.storyboard in Resources */,
+				7988AC3E1F3DA6E700588CD3 /* Assets.xcassets in Resources */,
+				7988AC3C1F3DA6E700588CD3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7988AC451F3DA6E700588CD3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7988AC501F3DA6E700588CD3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7988AC2F1F3DA6E700588CD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7988AC391F3DA6E700588CD3 /* ViewController.swift in Sources */,
+				7988AC371F3DA6E700588CD3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7988AC431F3DA6E700588CD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7988AC4C1F3DA6E700588CD3 /* SlideTilePuzzleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7988AC4E1F3DA6E700588CD3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7988AC571F3DA6E700588CD3 /* SlideTilePuzzleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7988AC491F3DA6E700588CD3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7988AC321F3DA6E700588CD3 /* SlideTilePuzzle */;
+			targetProxy = 7988AC481F3DA6E700588CD3 /* PBXContainerItemProxy */;
+		};
+		7988AC541F3DA6E700588CD3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7988AC321F3DA6E700588CD3 /* SlideTilePuzzle */;
+			targetProxy = 7988AC531F3DA6E700588CD3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7988AC3A1F3DA6E700588CD3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7988AC3B1F3DA6E700588CD3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7988AC3F1F3DA6E700588CD3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7988AC401F3DA6E700588CD3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7988AC591F3DA6E700588CD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7988AC5A1F3DA6E700588CD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7988AC5C1F3DA6E700588CD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 95GPBW627H;
+				INFOPLIST_FILE = SlideTilePuzzle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = swiftTut.SlideTilePuzzle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		7988AC5D1F3DA6E700588CD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 95GPBW627H;
+				INFOPLIST_FILE = SlideTilePuzzle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = swiftTut.SlideTilePuzzle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		7988AC5F1F3DA6E700588CD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 95GPBW627H;
+				INFOPLIST_FILE = SlideTilePuzzleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = swiftTut.SlideTilePuzzleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SlideTilePuzzle.app/SlideTilePuzzle";
+			};
+			name = Debug;
+		};
+		7988AC601F3DA6E700588CD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 95GPBW627H;
+				INFOPLIST_FILE = SlideTilePuzzleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = swiftTut.SlideTilePuzzleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SlideTilePuzzle.app/SlideTilePuzzle";
+			};
+			name = Release;
+		};
+		7988AC621F3DA6E700588CD3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 95GPBW627H;
+				INFOPLIST_FILE = SlideTilePuzzleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = swiftTut.SlideTilePuzzleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = SlideTilePuzzle;
+			};
+			name = Debug;
+		};
+		7988AC631F3DA6E700588CD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 95GPBW627H;
+				INFOPLIST_FILE = SlideTilePuzzleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = swiftTut.SlideTilePuzzleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = SlideTilePuzzle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7988AC2E1F3DA6E700588CD3 /* Build configuration list for PBXProject "SlideTilePuzzle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7988AC591F3DA6E700588CD3 /* Debug */,
+				7988AC5A1F3DA6E700588CD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7988AC5B1F3DA6E700588CD3 /* Build configuration list for PBXNativeTarget "SlideTilePuzzle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7988AC5C1F3DA6E700588CD3 /* Debug */,
+				7988AC5D1F3DA6E700588CD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7988AC5E1F3DA6E700588CD3 /* Build configuration list for PBXNativeTarget "SlideTilePuzzleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7988AC5F1F3DA6E700588CD3 /* Debug */,
+				7988AC601F3DA6E700588CD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7988AC611F3DA6E700588CD3 /* Build configuration list for PBXNativeTarget "SlideTilePuzzleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7988AC621F3DA6E700588CD3 /* Debug */,
+				7988AC631F3DA6E700588CD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7988AC2B1F3DA6E700588CD3 /* Project object */;
+}
