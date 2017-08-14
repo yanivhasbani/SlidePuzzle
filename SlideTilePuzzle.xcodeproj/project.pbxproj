@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		7988AC371F3DA6E700588CD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC361F3DA6E700588CD3 /* AppDelegate.swift */; };
-		7988AC391F3DA6E700588CD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC381F3DA6E700588CD3 /* ViewController.swift */; };
+		7988AC391F3DA6E700588CD3 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC381F3DA6E700588CD3 /* GameVC.swift */; };
 		7988AC3C1F3DA6E700588CD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7988AC3A1F3DA6E700588CD3 /* Main.storyboard */; };
 		7988AC3E1F3DA6E700588CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7988AC3D1F3DA6E700588CD3 /* Assets.xcassets */; };
 		7988AC411F3DA6E700588CD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7988AC3F1F3DA6E700588CD3 /* LaunchScreen.storyboard */; };
 		7988AC4C1F3DA6E700588CD3 /* SlideTilePuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC4B1F3DA6E700588CD3 /* SlideTilePuzzleTests.swift */; };
 		7988AC571F3DA6E700588CD3 /* SlideTilePuzzleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC561F3DA6E700588CD3 /* SlideTilePuzzleUITests.swift */; };
+		7988AC671F3DA7B800588CD3 /* SlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC661F3DA7B800588CD3 /* SlideCell.swift */; };
+		7988AC6C1F3DA9F500588CD3 /* UIAlertController+MyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC6B1F3DA9F500588CD3 /* UIAlertController+MyAlert.swift */; };
+		7988AC6F1F3DB94400588CD3 /* board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC6E1F3DB94400588CD3 /* board.swift */; };
+		7988AC721F3DBD3900588CD3 /* ShuffledCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC711F3DBD3900588CD3 /* ShuffledCollection.swift */; };
+		79D176E11F3DE8B1000D2A80 /* SwappingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D176E01F3DE8B1000D2A80 /* SwappingCollectionView.swift */; };
+		79D176E31F4039C9000D2A80 /* Array+BoardMoves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D176E21F4039C9000D2A80 /* Array+BoardMoves.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +42,7 @@
 /* Begin PBXFileReference section */
 		7988AC331F3DA6E700588CD3 /* SlideTilePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlideTilePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7988AC361F3DA6E700588CD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7988AC381F3DA6E700588CD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7988AC381F3DA6E700588CD3 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
 		7988AC3B1F3DA6E700588CD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7988AC3D1F3DA6E700588CD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7988AC401F3DA6E700588CD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +53,12 @@
 		7988AC521F3DA6E700588CD3 /* SlideTilePuzzleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlideTilePuzzleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7988AC561F3DA6E700588CD3 /* SlideTilePuzzleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTilePuzzleUITests.swift; sourceTree = "<group>"; };
 		7988AC581F3DA6E700588CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7988AC661F3DA7B800588CD3 /* SlideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideCell.swift; sourceTree = "<group>"; };
+		7988AC6B1F3DA9F500588CD3 /* UIAlertController+MyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+MyAlert.swift"; sourceTree = "<group>"; };
+		7988AC6E1F3DB94400588CD3 /* board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = board.swift; sourceTree = "<group>"; };
+		7988AC711F3DBD3900588CD3 /* ShuffledCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffledCollection.swift; sourceTree = "<group>"; };
+		79D176E01F3DE8B1000D2A80 /* SwappingCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwappingCollectionView.swift; sourceTree = "<group>"; };
+		79D176E21F4039C9000D2A80 /* Array+BoardMoves.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+BoardMoves.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +109,12 @@
 		7988AC351F3DA6E700588CD3 /* SlideTilePuzzle */ = {
 			isa = PBXGroup;
 			children = (
-				7988AC361F3DA6E700588CD3 /* AppDelegate.swift */,
-				7988AC381F3DA6E700588CD3 /* ViewController.swift */,
-				7988AC3A1F3DA6E700588CD3 /* Main.storyboard */,
-				7988AC3D1F3DA6E700588CD3 /* Assets.xcassets */,
+				7988AC701F3DBCE900588CD3 /* Extensions */,
+				7988AC6D1F3DB91A00588CD3 /* Model */,
+				7988AC6A1F3DA9B900588CD3 /* Resources */,
+				7988AC691F3DA9A800588CD3 /* Controller */,
+				7988AC681F3DA9A400588CD3 /* View */,
 				7988AC3F1F3DA6E700588CD3 /* LaunchScreen.storyboard */,
-				7988AC421F3DA6E700588CD3 /* Info.plist */,
 			);
 			path = SlideTilePuzzle;
 			sourceTree = "<group>";
@@ -123,6 +135,52 @@
 				7988AC581F3DA6E700588CD3 /* Info.plist */,
 			);
 			path = SlideTilePuzzleUITests;
+			sourceTree = "<group>";
+		};
+		7988AC681F3DA9A400588CD3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7988AC3A1F3DA6E700588CD3 /* Main.storyboard */,
+				7988AC361F3DA6E700588CD3 /* AppDelegate.swift */,
+				7988AC661F3DA7B800588CD3 /* SlideCell.swift */,
+				7988AC6B1F3DA9F500588CD3 /* UIAlertController+MyAlert.swift */,
+				79D176E01F3DE8B1000D2A80 /* SwappingCollectionView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7988AC691F3DA9A800588CD3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7988AC381F3DA6E700588CD3 /* GameVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		7988AC6A1F3DA9B900588CD3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7988AC421F3DA6E700588CD3 /* Info.plist */,
+				7988AC3D1F3DA6E700588CD3 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7988AC6D1F3DB91A00588CD3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7988AC6E1F3DB94400588CD3 /* board.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7988AC701F3DBCE900588CD3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7988AC711F3DBD3900588CD3 /* ShuffledCollection.swift */,
+				79D176E21F4039C9000D2A80 /* Array+BoardMoves.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,8 +320,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7988AC391F3DA6E700588CD3 /* ViewController.swift in Sources */,
+				7988AC721F3DBD3900588CD3 /* ShuffledCollection.swift in Sources */,
+				7988AC391F3DA6E700588CD3 /* GameVC.swift in Sources */,
+				7988AC6F1F3DB94400588CD3 /* board.swift in Sources */,
+				7988AC6C1F3DA9F500588CD3 /* UIAlertController+MyAlert.swift in Sources */,
+				7988AC671F3DA7B800588CD3 /* SlideCell.swift in Sources */,
+				79D176E31F4039C9000D2A80 /* Array+BoardMoves.swift in Sources */,
 				7988AC371F3DA6E700588CD3 /* AppDelegate.swift in Sources */,
+				79D176E11F3DE8B1000D2A80 /* SwappingCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +580,7 @@
 				7988AC5D1F3DA6E700588CD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7988AC5E1F3DA6E700588CD3 /* Build configuration list for PBXNativeTarget "SlideTilePuzzleTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +589,7 @@
 				7988AC601F3DA6E700588CD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7988AC611F3DA6E700588CD3 /* Build configuration list for PBXNativeTarget "SlideTilePuzzleUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +598,7 @@
 				7988AC631F3DA6E700588CD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
