@@ -91,7 +91,19 @@ class Utils {
   var possibleMoves:[[(rate:Int, board:[Int], move:BoardMove)]] = []
 }
 
+private var emptyIndex1 = -1
 extension Array {
+  var emptyIndex:Int {
+    get {
+      return emptyIndex1
+    }
+    set {
+      emptyIndex1 = newValue
+    }
+  }
+  
+  
+  
   mutating func doMove(move:BoardMove) {
     switch move {
     case .R:
@@ -211,15 +223,7 @@ extension Array {
       break
     }
     
-    return (rate:self.rateInternal(arr:arr, solved: solved), board:arr, move:move)
-  }
-  
-  private func rateInternal(arr:[Int], solved:[Int]) -> Int {
-    let beforeChange = self as! [Int]
-    if arr == beforeChange {
-      return Int.max
-    }
-    return self.rate(arr: arr, solved: solved)
+    return (rate:self.rate(arr:arr, solved: solved), board:arr, move:move)
   }
   
   func getNumberOfUnordered() -> Int {
@@ -235,7 +239,7 @@ extension Array {
     return rate
   }
   
-  func getNextStep() -> (nextStepDistance:Int, emptyTileDistance:Int) {
+  mutating func getNextStep() -> (nextStepDistance:Int, emptyTileDistance:Int) {
     let N = Int(sqrt(Double(self.count)))
     let emptyIndex:(x:Int, y:Int) = (x:(getEmptyIndex() % N),
                                      y:(getEmptyIndex() / N))
@@ -261,6 +265,7 @@ extension Array {
   }
   
   func rate(arr:[Int], solved:[Int]) -> Int {
+    var arr = arr
     let numberOfInordered = arr.getNumberOfUnordered()
     let next:(nextStepDistance:Int, emptyTileDistance:Int) = arr.getNextStep()
     let N = sqrt(Double(arr.count))
@@ -414,7 +419,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateULDLLURDRULLDRRURD(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.U()
       self.L()
       self.D()
@@ -440,7 +445,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if self.validateLLURDRRULLLDRRURD(emptyIndex:emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.L()
       self.L()
       self.URDRRULLLDRRUR()
@@ -452,7 +457,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if self.validateURDRRULLLDRRURD(emptyIndex:emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.URDRRULLLDRRUR()
       self.D()
     }
@@ -462,7 +467,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateURDRRULLLDRRUR(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.U()
       self.R()
       self.D()
@@ -502,7 +507,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateLURRDLULD(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.L()
       self.U()
       self.R()
@@ -519,7 +524,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateUULDRDLUURD(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.U()
       self.U()
       self.L()
@@ -538,7 +543,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateURRDLULD(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.U()
       self.R()
       self.R()
@@ -554,7 +559,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateDRRUL(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.D()
       self.R()
       self.R()
@@ -567,7 +572,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateDLLUR(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.D()
       self.L()
       self.L()
@@ -580,7 +585,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateRUULD(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.R()
       self.U()
       self.U()
@@ -593,7 +598,7 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateULD(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
+      
       self.U()
       self.L()
       self.D()
@@ -604,7 +609,6 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateRUL(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
       self.R()
       self.U()
       self.L()
@@ -615,7 +619,6 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateLUR(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
       self.L()
       self.U()
       self.R()
@@ -624,9 +627,8 @@ extension Array {
   
   mutating func R() {
     let rowSize = Int(sqrt(Double(self.count)))
-    let emptyIndex = self.getEmptyIndex()
+    let emptyIndex = self.emptyIndex
     if validateR(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
       Utils.shared.shuffled = Utils.shared.shuffled + "R"
       self.swap(empty:emptyIndex, index: emptyIndex + 1)
     }
@@ -636,7 +638,6 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateL(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
       Utils.shared.shuffled = Utils.shared.shuffled + "L"
       self.swap(empty:emptyIndex, index: emptyIndex - 1)
     }
@@ -646,7 +647,6 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateU(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
       Utils.shared.shuffled = Utils.shared.shuffled + "U"
       self.swap(empty:emptyIndex, index: emptyIndex - rowSize)
     }
@@ -656,27 +656,19 @@ extension Array {
     let rowSize = Int(sqrt(Double(self.count)))
     let emptyIndex = self.getEmptyIndex()
     if validateD(emptyIndex: emptyIndex, rowSize: rowSize) {
-      print("valid \(#function)")
       Utils.shared.shuffled = Utils.shared.shuffled + "D"
       self.swap(empty:emptyIndex, index: emptyIndex + rowSize)
     }
   }
   
-  func getEmptyIndex() -> Int {
-    if let arr = self as? Array<Int> {
-      for num in arr {
-        if num == -1 {
-          return arr.index(of: num)!
-        }
-      }
-    }
-    
-    return -1
+  mutating func getEmptyIndex() -> Int {
+    return self.emptyIndex
   }
   
   mutating func swap(empty:Int, index:Int) {
     let tmp = self[empty]
     self[empty] = self[index]
+    self.emptyIndex = index
     self[index] = tmp
   }
 }

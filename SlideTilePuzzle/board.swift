@@ -41,7 +41,6 @@ class Board: NSObject {
   var solving:Bool
   var generateSolution:Bool
   var solution:(result:Bool, path:[BoardMove]) = (result:false, path:[])
-  var emptyIndex:Int
   
   var delegate: BoardDelegate?
   
@@ -50,12 +49,13 @@ class Board: NSObject {
     solvedModel = (1...Int(pow(Double(size), 2)-1)).map({$0})
     model = solvedModel
     model.append(-1)
+    model.emptyIndex = solvedModel.count
+    sleep(1)
     model = model.shuffle()!
     Utils.shared.shuffled.solving = true
     solvedModel.append(-1)
     solving = false
     generateSolution = false
-    emptyIndex = (solvedModel.count - 1)
   }
   
   func boardSolved() -> Bool {
@@ -99,7 +99,7 @@ class Board: NSObject {
     
     solving = true
     DispatchQueue.global().async {
-      if let solvedMoves = self.takeAnotherStep(arr: self.model) {
+      if let solvedMoves = self.takeAnotherStep() {
         self.solving = false
         self.solution = solvedMoves
         if self.generateSolution {
@@ -111,32 +111,36 @@ class Board: NSObject {
     }
   }
   
-  func takeAnotherStep(arr: [Int]) -> (result:Bool, path:[BoardMove])? {
-    if arr == solvedModel {
-      return (result:true, path:[])
-    }
-    
+  func takeAnotherStep() -> (result:Bool, path:[BoardMove])? {
     var best = (rate:Int.max, board:[Int](), move:BoardMove.D)
-    for move in BoardMove.U.rawValue...BoardMove.ULDLLURDRULLDRRURD.rawValue {
-      let result = arr.rateMove(move: move, solved: solvedModel)
-      if result.rate < arr.rate(arr: arr, solved: solvedModel) {
-        if result.rate < best.rate {
-          best = result
+    var result = (result:false, path:[BoardMove.D])
+    result.path.remove(at: 0)
+    while best.rate != 0 {
+      let bestBefore = best
+      let arr = self.model
+      let currenctScore = arr.rate(arr: arr, solved: solvedModel)
+      for move in BoardMove.U.rawValue...BoardMove.ULDLLURDRULLDRRURD.rawValue {
+        let result = arr.rateMove(move: move, solved: solvedModel)
+        if result.rate < currenctScore {
+          if result.rate < best.rate {
+            best = result
+          }
         }
       }
-    }
-    
-    
-    var tempArr = arr
-    tempArr.doMove(move: best.move)
-    if var result = self.takeAnotherStep(arr:tempArr) {
-      if result.result {
-        result.path.append(best.move)
-        return result
+      if bestBefore.rate == best.rate {
+         if !self.boardSolved() {
+          assert(false, "No Iteration")
+         } else {
+          break
+        }
       }
+      
+      result.path.append(best.move)
+      self.model.doMove(move: best.move)
     }
     
-    return nil
+    result.result = true
+    return result
   }
   
   func stop() {
@@ -144,7 +148,7 @@ class Board: NSObject {
   }
   
   func swap(at:IndexPath, with: IndexPath) {
-    let emptyIndex = model.getEmptyIndex()
+    let emptyIndex = model.emptyIndex
     if at.row != emptyIndex, with.row != emptyIndex {
       assert(false, "Wrong swapping!")
     }

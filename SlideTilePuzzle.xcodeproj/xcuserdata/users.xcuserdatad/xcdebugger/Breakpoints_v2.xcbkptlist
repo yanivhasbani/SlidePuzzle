@@ -24,16 +24,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SlideTilePuzzle/board.swift"
-            timestampString = "525097742.515136"
+            timestampString = "525101460.860966"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "takeAnotherStep(arr:)"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "takeAnotherStep()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -44,7 +44,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SlideTilePuzzle/board.swift"
-            timestampString = "525097577.484115"
+            timestampString = "525101460.860966"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
@@ -56,16 +56,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SlideTilePuzzle/board.swift"
-            timestampString = "525097761.738948"
+            timestampString = "525101460.860966"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "takeAnotherStep(arr:)"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "takeAnotherStep()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -76,28 +76,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SlideTilePuzzle/board.swift"
-            timestampString = "525097774.925228"
+            timestampString = "525101460.860966"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "takeAnotherStep(arr:)"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "init(size:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SlideTilePuzzle/board.swift"
-            timestampString = "525097776.632048"
+            timestampString = "525101455.428762"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "takeAnotherStep(arr:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "init(size:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SlideTilePuzzle/board.swift"
+            timestampString = "525102237.415353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "takeAnotherStep()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SlideTilePuzzle/board.swift"
+            timestampString = "525102239.606874"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "takeAnotherStep()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
