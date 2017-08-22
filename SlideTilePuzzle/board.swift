@@ -8,38 +8,30 @@
 
 import UIKit
 
-func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
-  var i = 0
-  return AnyIterator {
-    let next = withUnsafeBytes(of: &i) { $0.load(as: T.self) }
-    if next.hashValue != i { return nil }
-    i += 1
-    return next
-  }
-}
-
-enum BoardMove {
-  case U
-  case D
-  case L
-  case R
-  case LUR
-  case RUL
-  case ULD
-  case RUULD
-  case DLLUR
-  case DRRUL
-  case URRDLULD
-  case UULDRDLUURD
-  case LURRDLULD
-  case URDRRULLLDRRUR
-  case URDRRULLLDRRURD
-  case LLURDRRULLLDRRURD
-  case ULDLLURDRULLDRRURD
+enum BoardMove:Int {
+  case U = 0
+  case D = 1
+  case L = 2
+  case R = 3
+  case LUR = 4
+  case RUL = 5
+  case ULD = 6
+  case DRRUL = 7
+  case DLLUR = 8
+  case RUULD = 9
+  case URRDLULD = 10
+  case LURRDLULD = 11
+  case UULDRDLUURD = 12
+  case URDRULLDRUR = 13
+  case URDRRULLLDRRUR = 14
+  case URDRRULLLDRRURD = 15
+  case LLURDRRULLLDRRURD = 16
+  case ULDLLURDRULLDRRURD = 17
 }
 
 protocol BoardDelegate {
-  func updateUI()
+  func updateCollection()
+  func updateLabel()
 }
 
 class Board: NSObject {
@@ -47,6 +39,8 @@ class Board: NSObject {
   var solvedModel = [Int]()
   var rowSize:Int
   var solving:Bool
+  var generateSolution:Bool
+  var solution:(result:Bool, path:[BoardMove]) = (result:false, path:[])
   var emptyIndex:Int
   
   var delegate: BoardDelegate?
@@ -54,13 +48,13 @@ class Board: NSObject {
   init(size:Int) {
     rowSize = size
     solvedModel = (1...Int(pow(Double(size), 2)-1)).map({$0})
-    model = solvedModel.shuffled()
+    model = solvedModel
     model.append(-1)
+    model = model.shuffle()!
+    Utils.shared.shuffled.solving = true
     solvedModel.append(-1)
     solving = false
-    emptyIndex = (solvedModel.count - 1)
-    solvedModel = [1,2,3,4,5,6,7,8,-1]
-    model = [8,2,1,4,5,6,7,3,-1]
+    generateSolution = false
     emptyIndex = (solvedModel.count - 1)
   }
   
@@ -68,42 +62,90 @@ class Board: NSObject {
     return model == solvedModel
   }
   
-  func solve() {
+  func displaySolution() {
+    var tmpSolution = solution
+    for move in solution.path.reversed() {
+      if self.generateSolution == false {
+        self.solution = tmpSolution
+        return
+      }
+      self.model.doMove(move: move)
+      if let delegate = self.delegate {
+        delegate.updateCollection()
+      }
+      tmpSolution.path.remove(at: (tmpSolution.path.count - (1+tmpSolution.path.reversed().index(of: move)!)))
+      sleep(1)
+    }
+    if let delegate = self.delegate {
+      delegate.updateLabel()
+    }
+  }
+  
+  func getSolution() {
+    generateSolution = true
+    DispatchQueue.global().async {
+      self.trySolving()
+    }
+  }
+  
+  func trySolving() {
+    if solving {
+      return
+    }
+    
+    if solution.result {
+      displaySolution()
+    }
+    
     solving = true
     DispatchQueue.global().async {
-      while (!self.boardSolved()) {
-        if self.solving {
-          self.takeAnotherStep()
+      if let solvedMoves = self.takeAnotherStep(arr: self.model) {
+        self.solving = false
+        self.solution = solvedMoves
+        if self.generateSolution {
+          self.displaySolution()
+        }
+      } else {
+//        assert(false, "No Solution :(")
+      }
+    }
+  }
+  
+  func takeAnotherStep(arr: [Int]) -> (result:Bool, path:[BoardMove])? {
+    if arr == solvedModel {
+      return (result:true, path:[])
+    }
+    
+    var best = (rate:Int.max, board:[Int](), move:BoardMove.D)
+    for move in BoardMove.U.rawValue...BoardMove.ULDLLURDRULLDRRURD.rawValue {
+      let result = arr.rateMove(move: move, solved: solvedModel)
+      if result.rate < arr.rate(arr: arr, solved: solvedModel) {
+        if result.rate < best.rate {
+          best = result
         }
       }
     }
-  }
-  
-  func takeAnotherStep() {
-    var best = (rate:Int.max, board:[Int]())
-    for move in iterateEnum(BoardMove.self) {
-      let result = model.rateMove(move: move, solved: solvedModel)
-      if result.rate < best.rate {
-        best = result
+    
+    
+    var tempArr = arr
+    tempArr.doMove(move: best.move)
+    if var result = self.takeAnotherStep(arr:tempArr) {
+      if result.result {
+        result.path.append(best.move)
+        return result
       }
     }
     
-    model = best.board
-    if let delegate = self.delegate {
-      delegate.updateUI()
-    }
+    return nil
   }
   
   func stop() {
-    solving = false
+    generateSolution = false
   }
   
   func swap(at:IndexPath, with: IndexPath) {
-    if (at.row == emptyIndex) {
-      emptyIndex = with.row
-    } else if  (with.row == emptyIndex) {
-      emptyIndex = at.row
-    } else {
+    let emptyIndex = model.getEmptyIndex()
+    if at.row != emptyIndex, with.row != emptyIndex {
       assert(false, "Wrong swapping!")
     }
     let tmp = model[at.row]

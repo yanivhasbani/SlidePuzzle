@@ -68,15 +68,15 @@ class GameVC: UIViewController, UIGestureRecognizerDelegate {
   @IBAction func solvePressed(_ sender: Any) {
     if !solving! {
       solving = true
-      board?.solve()
+      board?.getSolution()
       DispatchQueue.main.async {
-        self.solveButton.titleLabel?.text = "Stop"
+        self.solveButton.setTitle("Stop", for: UIControlState.normal)
       }
     } else {
       solving = false
       board?.stop()
       DispatchQueue.main.async {
-        self.solveButton.titleLabel?.text = "Solve"
+        self.solveButton.setTitle("Solve", for: UIControlState.normal)
       }
     }
   }
@@ -149,19 +149,22 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
 extension GameVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let text = gameSize.text, text.characters.count > 0,
-      let size = Int(text) , size > 0{
+      let size = Int(text) , size > 1{
       gameSize.resignFirstResponder()
       gameSize.isHidden = true
       gameCollectionView.isHidden = false
       board = Board.init(size:size)
       board?.delegate = self
       gameCollectionView.reloadData()
+      solveButton.isHidden = false
+      self.solveButton.setTitle("Solve", for: UIControlState.normal)
+      board!.trySolving()
       return true
     }
     
     let alert = UIAlertController()
     alert.create(title: "Wrong board size",
-                 message: "Please enter a number that has a integer square root")
+                 message: "Please enter a number that is greater than 1")
     self.present(alert, animated: true, completion: nil)
     
     return false
@@ -175,9 +178,19 @@ extension GameVC: SwapDelegate {
 }
 
 extension GameVC: BoardDelegate {
-  func updateUI() {
+  func updateCollection() {
     DispatchQueue.main.async {
       self.gameCollectionView.reloadData()
+    }
+  }
+  
+  func updateLabel() {
+    DispatchQueue.main.async {
+      self.solving = false
+      self.board?.stop()
+      DispatchQueue.main.async {
+        self.solveButton.isHidden = true
+      }
     }
   }
 }

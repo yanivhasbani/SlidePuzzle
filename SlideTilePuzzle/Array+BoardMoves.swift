@@ -8,8 +8,151 @@
 
 import UIKit
 
+class Shuffle {
+  var shuffled = ""
+  var solving:Bool = false
+  
+  static func +(shuffled:Shuffle, string:String) -> Shuffle {
+    if shuffled.solving {
+      return shuffled
+    }
+    
+    if shuffled.shuffled.characters.count == 0 {
+      shuffled.shuffled = string
+      return shuffled
+    }
+    
+    let lastOp = "\(shuffled.shuffled.characters.last!)"
+    switch(lastOp) {
+    case "U":
+      if string == "D" {
+        shuffled.shuffled.characters.removeLast()
+      } else {
+        shuffled.shuffled = shuffled.shuffled + string
+      }
+      break
+    case "D":
+      if string == "U" {
+        shuffled.shuffled.characters.removeLast()
+      } else {
+        shuffled.shuffled = shuffled.shuffled + string
+      }
+      break
+    case "L":
+      if string == "R" {
+        shuffled.shuffled.characters.removeLast()
+      } else {
+        shuffled.shuffled = shuffled.shuffled + string
+      }
+      break
+    case "R":
+      if string == "L" {
+        shuffled.shuffled.characters.removeLast()
+      } else {
+        shuffled.shuffled = shuffled.shuffled + string
+      }
+      break
+    default:
+      break
+    }
+    return shuffled
+  }
+  
+  func solution() -> String {
+    var path = ""
+    for char in shuffled.characters.reversed() {
+      let strChar = "\(char)"
+      switch strChar {
+      case "U":
+        path = path + "D"
+        break
+      case "D":
+        path = path + "U"
+        break
+      case "R":
+        path = path + "L"
+        break
+      case "L":
+        path = path + "R"
+        break
+      default:
+        break
+      }
+    }
+    
+    return path
+  }
+}
+
+class Utils {
+  static let shared:Utils = Utils()
+  var shuffled:Shuffle = Shuffle()
+  var moves:[(rate:Int, board:[Int], move:BoardMove)] = []
+  var possibleMoves:[[(rate:Int, board:[Int], move:BoardMove)]] = []
+}
+
 extension Array {
-  func rateMove(move:BoardMove, solved:[Int]) -> (rate:Int, board:[Int]) {
+  mutating func doMove(move:BoardMove) {
+    switch move {
+    case .R:
+      self.R()
+      break
+    case .L:
+      self.L()
+      break
+    case .D:
+      self.D()
+      break
+    case .U:
+      self.U()
+      break
+    case .LUR:
+      self.LUR()
+      break
+    case .RUL:
+      self.RUL()
+      break
+    case .ULD:
+      self.ULD()
+      break
+    case .RUULD:
+      self.RUULD()
+      break
+    case .DLLUR:
+      self.DLLUR()
+      break
+    case .DRRUL:
+      self.DRRUL()
+      break
+    case .URRDLULD:
+      self.URRDLULD()
+      break
+    case .UULDRDLUURD:
+      self.UULDRDLUURD()
+      break
+    case .URDRULLDRUR:
+      self.URDRULLDRUR()
+      break
+    case .LURRDLULD:
+      self.LURRDLULD()
+      break
+    case .URDRRULLLDRRUR:
+      self.URDRRULLLDRRUR()
+      break
+    case .URDRRULLLDRRURD:
+      self.URDRRULLLDRRURD()
+      break
+    case .LLURDRRULLLDRRURD:
+      self.LLURDRRULLLDRRURD()
+      break
+    case .ULDLLURDRULLDRRURD:
+      self.ULDLLURDRULLDRRURD()
+      break
+    }
+  }
+  
+  func rateMove(move:Int, solved:[Int]) -> (rate:Int, board:[Int], move:BoardMove) {
+    let move:BoardMove = BoardMove(rawValue: move)!
     var arr = self as! [Int]
     switch move {
     case .R:
@@ -48,6 +191,9 @@ extension Array {
     case .UULDRDLUURD:
       arr.UULDRDLUURD()
       break
+    case .URDRULLDRUR:
+      arr.URDRULLDRUR()
+      break
     case .LURRDLULD:
       arr.LURRDLULD()
       break
@@ -65,32 +211,65 @@ extension Array {
       break
     }
     
-    return (rate:self.rate(arr:arr, solved: solved), board:arr)
+    return (rate:self.rateInternal(arr:arr, solved: solved), board:arr, move:move)
   }
   
-  private func rate(arr:[Int], solved:[Int]) -> Int {
-    if let beforeChanged = self as? Array<Int>,
-      arr != beforeChanged {
-      var rate = 0
-      for num in arr {
-        if arr[arr.index(of: num)!] != solved[arr.index(of: num)!] {
-          rate = rate + 1
-        }
+  private func rateInternal(arr:[Int], solved:[Int]) -> Int {
+    let beforeChange = self as! [Int]
+    if arr == beforeChange {
+      return Int.max
+    }
+    return self.rate(arr: arr, solved: solved)
+  }
+  
+  func getNumberOfUnordered() -> Int {
+    var rate = 0
+    var arr = self as! [Int]
+    for num in arr {
+      if arr[arr.index(of: num)!] != arr.index(of: num)! + 1 {
+        break
       }
-      var beforeRate = 0
-      for num in beforeChanged {
-        if beforeChanged[beforeChanged.index(of: num)!] != solved[beforeChanged.index(of: num)!] {
-          beforeRate = beforeRate + 1
-        }
-      }
-      if beforeRate < rate {
-        print("not improving..")
-      }
-      
-      return rate
+      rate = rate + 1
     }
     
-    return Int.max
+    return rate
+  }
+  
+  func getNextStep() -> (nextStepDistance:Int, emptyTileDistance:Int) {
+    let N = Int(sqrt(Double(self.count)))
+    let emptyIndex:(x:Int, y:Int) = (x:(getEmptyIndex() % N),
+                                     y:(getEmptyIndex() / N))
+    
+    var nextItemIndex = (x:0, y:0)
+    var indexOfCorrectLocation = (x:0, y:0)
+    if let arr = self as? Array<Int> {
+      for num in 1...Int(pow(Double(N),2)) - 1 {
+        if num != arr.index(of: num)! + 1 {
+          nextItemIndex = (x:Int(arr.index(of: num)! % N), y: Int(arr.index(of: num)! / N))
+          indexOfCorrectLocation = (x:Int((num - 1) % N), y: Int((num - 1) / N))
+          break
+        }
+      }
+      let nextStepDistance = abs(nextItemIndex.x - indexOfCorrectLocation.x) + abs(nextItemIndex.y - indexOfCorrectLocation.y)
+      let emptyTileDistance = abs(nextItemIndex.x - emptyIndex.x) + abs(nextItemIndex.y - emptyIndex.y)
+      
+      return (nextStepDistance:nextStepDistance, emptyTileDistance:emptyTileDistance)
+    }
+    
+    return (nextStepDistance:0, emptyTileDistance:0)
+    
+  }
+  
+  func rate(arr:[Int], solved:[Int]) -> Int {
+    let numberOfInordered = arr.getNumberOfUnordered()
+    let next:(nextStepDistance:Int, emptyTileDistance:Int) = arr.getNextStep()
+    let N = sqrt(Double(arr.count))
+    
+    let c1 = 4 * Int(pow(N, 2.0)) * (Int(pow(N, 2.0)) - numberOfInordered)
+    let c2 = 2 * Int(N) * (next.nextStepDistance)
+    let c3 = next.emptyTileDistance
+    
+    return c1 + c2 + c3
   }
   
   func validateR(emptyIndex:Int, rowSize:Int) -> Bool {
@@ -200,6 +379,15 @@ extension Array {
     return false
   }
   
+  func validateURDRULLDRUR(emptyIndex: Int, rowSize: Int) -> Bool {
+    if self.validateU(emptyIndex: emptyIndex, rowSize: rowSize),
+      (emptyIndex + 2) / rowSize == emptyIndex / rowSize {
+      return true
+    }
+    
+    return false
+  }
+  
   func validateURDRRULLLDRRURD(emptyIndex:Int, rowSize:Int) -> Bool {
     return validateURDRRULLLDRRUR(emptyIndex: emptyIndex, rowSize: rowSize)
   }
@@ -286,6 +474,24 @@ extension Array {
       self.L()
       self.D()
       self.R()
+      self.R()
+      self.U()
+      self.R()
+    }
+  }
+  
+  mutating func URDRULLDRUR() {
+    let rowSize = Int(sqrt(Double(self.count)))
+    let emptyIndex = self.getEmptyIndex()
+    if validateURDRULLDRUR(emptyIndex: emptyIndex, rowSize: rowSize) {
+      self.U()
+      self.R()
+      self.D()
+      self.R()
+      self.U()
+      self.L()
+      self.L()
+      self.D()
       self.R()
       self.U()
       self.R()
@@ -421,6 +627,7 @@ extension Array {
     let emptyIndex = self.getEmptyIndex()
     if validateR(emptyIndex: emptyIndex, rowSize: rowSize) {
       print("valid \(#function)")
+      Utils.shared.shuffled = Utils.shared.shuffled + "R"
       self.swap(empty:emptyIndex, index: emptyIndex + 1)
     }
   }
@@ -430,6 +637,7 @@ extension Array {
     let emptyIndex = self.getEmptyIndex()
     if validateL(emptyIndex: emptyIndex, rowSize: rowSize) {
       print("valid \(#function)")
+      Utils.shared.shuffled = Utils.shared.shuffled + "L"
       self.swap(empty:emptyIndex, index: emptyIndex - 1)
     }
   }
@@ -439,6 +647,7 @@ extension Array {
     let emptyIndex = self.getEmptyIndex()
     if validateU(emptyIndex: emptyIndex, rowSize: rowSize) {
       print("valid \(#function)")
+      Utils.shared.shuffled = Utils.shared.shuffled + "U"
       self.swap(empty:emptyIndex, index: emptyIndex - rowSize)
     }
   }
@@ -448,6 +657,7 @@ extension Array {
     let emptyIndex = self.getEmptyIndex()
     if validateD(emptyIndex: emptyIndex, rowSize: rowSize) {
       print("valid \(#function)")
+      Utils.shared.shuffled = Utils.shared.shuffled + "D"
       self.swap(empty:emptyIndex, index: emptyIndex + rowSize)
     }
   }

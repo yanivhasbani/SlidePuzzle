@@ -9,25 +9,34 @@
 import UIKit
 
 extension MutableCollection where Index == Int {
-  /// Shuffle the elements of `self` in-place.
-  mutating func shuffle() {
-    // empty and single-element collections don't shuffle
-    if count < 2 { return }
-    
-    for i in startIndex ..< endIndex - 1 {
-      let j = Int(arc4random_uniform(UInt32(endIndex - i))) + i
-      if i != j {
-        swap(&self[i], &self[j])
-      }
+    /// Shuffle the elements of `self` in-place.
+    mutating func shuffle() -> [Int]? {
+        // empty and single-element collections don't shuffle
+        if var arr = self as? [Int] {
+            var i = 0
+            while i < 10000 {
+                i = i + 1
+                let move = arc4random_uniform(4) % 4
+                switch move {
+                case 0:
+                    arr.U()
+                    break
+                case 1:
+                    arr.D()
+                    break
+                case 2:
+                    arr.R()
+                    break
+                case 3:
+                    arr.L()
+                    break
+                default:
+                    break
+                }
+            }
+            return arr
+        }
+        
+        return []
     }
-  }
-}
-
-extension Collection {
-  /// Return a copy of `self` with its elements shuffled
-  func shuffled() -> [Iterator.Element] {
-    var list = Array(self)
-    list.shuffle()
-    return list
-  }
 }
