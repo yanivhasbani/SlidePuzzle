@@ -35,133 +35,173 @@ protocol BoardDelegate {
 }
 
 class Board: NSObject {
-  var model = [Int]()
+  var model = MyBoard()
+  var image:Image = Image()
+  var currentlyShowing:MyBoard = MyBoard()
   var solvedModel = [Int]()
   var rowSize:Int
   var solving:Bool
   var generateSolution:Bool
   var solution:(result:Bool, path:[BoardMove]) = (result:false, path:[])
+  var stopped:Bool = false
   
   var delegate: BoardDelegate?
   
-  init(size:Int) {
+  init(size:Int, image:UIImage) {
     rowSize = size
     solvedModel = (1...Int(pow(Double(size), 2)-1)).map({$0})
-    model = solvedModel
-    model.append(-1)
+    model.model = solvedModel
+    model.model.append(-1)
     model.emptyIndex = solvedModel.count
-    sleep(1)
-    model = model.shuffle()!
+    model.model = model.shuffle()!
+    Image.shared.shuffle(model: model.model, imageRef:image)
+    currentlyShowing = model.createBoard()
     Utils.shared.shuffled.solving = true
+    Utils.shared.shuffled.lastValidMove = ""
     solvedModel.append(-1)
     solving = false
     generateSolution = false
   }
   
-  func boardSolved() -> Bool {
-    return model == solvedModel
+  func boardSolved(arr:MyBoard) -> Bool {
+    return arr.model == solvedModel
   }
   
   func displaySolution() {
-    var tmpSolution = solution
-    for move in solution.path.reversed() {
-      if self.generateSolution == false {
-        self.solution = tmpSolution
-        return
-      }
-      self.model.doMove(move: move)
+    displayNextStep()
+  }
+  
+  func displayNextStep() {
+    if !generateSolution {
+      return
+    }
+    
+    if boardSolved(arr: self.currentlyShowing),
+      let delegate = self.delegate {
+      delegate.updateLabel()
+      return
+    }
+    
+    if self.takeAnotherStep(),
+      let move = solution.path.first {
+      self.currentlyShowing.doMove(move: move)
       if let delegate = self.delegate {
         delegate.updateCollection()
       }
-      tmpSolution.path.remove(at: (tmpSolution.path.count - (1+tmpSolution.path.reversed().index(of: move)!)))
-      sleep(1)
-    }
-    if let delegate = self.delegate {
-      delegate.updateLabel()
+      if solution.path.count > 0 {
+        solution.path.removeFirst()
+      }
     }
   }
   
   func getSolution() {
     generateSolution = true
+    stopped = false
     DispatchQueue.global().async {
-      self.trySolving()
+      self.displaySolution()
     }
   }
   
   func trySolving() {
-    if solving {
-      return
-    }
-    
     if solution.result {
       displaySolution()
+      return
     }
     
     solving = true
     DispatchQueue.global().async {
-      if let solvedMoves = self.takeAnotherStep() {
+      if self.takeAnotherStep() {
         self.solving = false
-        self.solution = solvedMoves
         if self.generateSolution {
           self.displaySolution()
+        } else {
+          //        assert(false, "No Solution :(")
         }
-      } else {
-//        assert(false, "No Solution :(")
       }
     }
   }
   
-  func takeAnotherStep() -> (result:Bool, path:[BoardMove])? {
-    var best = (rate:Int.max, board:[Int](), move:BoardMove.D)
+  func takeAnotherStep() -> Bool {
+    var best = (rate:Int.max, move:BoardMove.D)
     var result = (result:false, path:[BoardMove.D])
     result.path.remove(at: 0)
+    let arr = self.model
+    var currenctScore = arr.rate()
+    let startAll = DispatchTime.now()
+    let stepSize = 10
     while best.rate != 0 {
+      if stopped {
+        return false
+      }
+      let start = DispatchTime.now()
       let bestBefore = best
-      let arr = self.model
-      let currenctScore = arr.rate(arr: arr, solved: solvedModel)
+      let loopStart = DispatchTime.now()
       for move in BoardMove.U.rawValue...BoardMove.ULDLLURDRULLDRRURD.rawValue {
-        let result = arr.rateMove(move: move, solved: solvedModel)
-        if result.rate < currenctScore {
-          if result.rate < best.rate {
-            best = result
-          }
+        let startI = DispatchTime.now()
+        let iterationResult = arr.rateMove(move: move, solution:solvedModel)
+        print("Rate move \(move) E= \(DispatchTime.now().rawValue - startI.rawValue)")
+        if iterationResult.rate < currenctScore,
+          iterationResult.rate < best.rate {
+          best = iterationResult
         }
       }
+      print("Loop end = \(DispatchTime.now().rawValue - loopStart.rawValue)")
       if bestBefore.rate == best.rate {
-         if !self.boardSolved() {
+        if !self.boardSolved(arr:arr) {
           assert(false, "No Iteration")
-         } else {
+        } else {
           break
         }
       }
       
-      result.path.append(best.move)
-      self.model.doMove(move: best.move)
+      let appendStart = DispatchTime.now()
+      solution.path.append(best.move)
+      print("Append E= \(DispatchTime.now().rawValue - appendStart.rawValue)")
+      currenctScore = best.rate
+      let doMoveTime = DispatchTime.now()
+      arr.doMove(move: best.move)
+      if solution.path.count >= stepSize {
+        solution.result = true
+        return true
+      }
+      print("Do Move E= \(DispatchTime.now().rawValue - doMoveTime.rawValue)")
+      print("Finished iteration time = \(DispatchTime.now().rawValue - start.rawValue)")
     }
     
-    result.result = true
-    return result
+    solution.result = true
+    print("End = \(DispatchTime.now().rawValue - startAll.rawValue)")
+    return true
   }
   
   func stop() {
     generateSolution = false
+    stopped = true
+  }
+  
+  func dismiss() {
+    generateSolution = false
+    stopped = true
+    solution = (result:false, path:[])
+    delegate?.updateLabel()
   }
   
   func swap(at:IndexPath, with: IndexPath) {
-    let emptyIndex = model.emptyIndex
-    if at.row != emptyIndex, with.row != emptyIndex {
-      assert(false, "Wrong swapping!")
+    let emptyIndex = currentlyShowing.emptyIndex
+    if at.row == emptyIndex {
+      currentlyShowing.swap(empty: at.row, index: with.row)
+    } else if with.row == emptyIndex {
+      currentlyShowing.swap(empty: with.row, index: at.row)
+    } else {
+      assert(false, "Wrong empty index")
     }
-    let tmp = model[at.row]
-    model[at.row] = model[with.row]
-    model[with.row] = tmp
+    model = currentlyShowing.createBoard()
   }
   
   func checkCellForMovement(at: IndexPath) -> Bool {
-    if (at.row - 1 >= 0 && model[at.row - 1] == -1) ||
-      (at.row + 1 < model.count && model[at.row + 1] == -1) ||
-      (at.row - rowSize >= 0 && model[at.row - rowSize] == -1) ||
-      (at.row + rowSize < model.count && model[at.row + rowSize] == -1) {
+    if (at.row - 1 >= 0 && currentlyShowing.model[at.row - 1] == -1) ||
+      (at.row + 1 < currentlyShowing.model.count && currentlyShowing.model[at.row + 1] == -1) ||
+      (at.row - rowSize >= 0 && currentlyShowing.model[at.row - rowSize] == -1) ||
+      (at.row + rowSize < currentlyShowing.model.count && currentlyShowing.model[at.row + rowSize] == -1) {
       return true
     }
     

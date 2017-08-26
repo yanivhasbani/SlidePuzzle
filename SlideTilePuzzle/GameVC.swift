@@ -13,9 +13,16 @@ class GameVC: UIViewController, UIGestureRecognizerDelegate {
   @IBOutlet var gameCollectionView: SwappingCollectionView!
   @IBOutlet var gameSize: UITextField!
   @IBOutlet var solveButton: UIButton!
+  @IBOutlet weak var stack: UIStackView!
+  @IBOutlet weak var imageButton: UIButton!
+  @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var progress: UIActivityIndicatorView!
   
   var board:Board?
   var solving:Bool?
+  var imageLoaded:Bool = false
+  var imagePicker = UIImagePickerController()
+  var imageRef:UIImage?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,6 +33,8 @@ class GameVC: UIViewController, UIGestureRecognizerDelegate {
     gameCollectionView.dataSource = self
     gameCollectionView.swapDelegate = self
     
+    progress.isHidden = true
+    
     let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
     tapGR.delegate = self
     tapGR.numberOfTouchesRequired = 2
@@ -33,13 +42,20 @@ class GameVC: UIViewController, UIGestureRecognizerDelegate {
     
     let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(_:)))
     gameCollectionView.addGestureRecognizer(longPressGesture)
+    
+    let imagePress = UITapGestureRecognizer(target: self, action: #selector(self.imageViewPressed(_:)))
+    imageView.addGestureRecognizer(imagePress)
+    imageView.isUserInteractionEnabled = true
     solving = false
   }
   
   func handleTap(_ gesture: UITapGestureRecognizer){
-    gameSize.isHidden = false
+    progress.isHidden = true
+    stack.isHidden = false
     gameCollectionView.isHidden = true
-    gameCollectionView.reloadData()
+    board?.dismiss()
+    board = nil
+//    gameCollectionView.reloadData()
   }
   
   func handleLongGesture(_ gesture: UILongPressGestureRecognizer) {
@@ -63,7 +79,23 @@ class GameVC: UIViewController, UIGestureRecognizerDelegate {
     }
   }
   
+  func imageViewPressed(_ gesture: UITapGestureRecognizer) {
+    loadPicker()
+  }
   
+  @IBAction func imagePressed(_ sender: Any) {
+    loadPicker()
+  }
+  
+  func loadPicker() {
+    if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+      imagePicker.delegate = self
+      imagePicker.sourceType = .savedPhotosAlbum;
+      imagePicker.allowsEditing = false
+      
+      self.present(imagePicker, animated: true, completion: nil)
+    }
+  }
   
   @IBAction func solvePressed(_ sender: Any) {
     if !solving! {
@@ -91,7 +123,7 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if let board =  board {
-      return board.model.count
+      return board.currentlyShowing.model.count
     }
     
     return 0
@@ -100,7 +132,7 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SlideCell", for: indexPath) as? SlideCell,
       let board = board {
-      cell.configureCell(number: String(board.model[indexPath.row]))
+      cell.configureCell(number: String(board.currentlyShowing.model[indexPath.row]))
       return cell
     }
     
@@ -144,27 +176,49 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 0
   }
+  
+  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    if indexPath.row == (board?.model.model.count)! - 1 {
+      progress.stopAnimating()
+      let time = DispatchTime.now() + 1
+      DispatchQueue.global().asyncAfter(deadline: time, execute: {
+        self.board?.displayNextStep()
+      })
+    }
+  }
 }
 
 extension GameVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let text = gameSize.text, text.characters.count > 0,
-      let size = Int(text) , size > 1{
+      let size = Int(text) , size > 1, size < 12{
+      if !imageLoaded {
+        gameSize.resignFirstResponder()
+        let alert = UIAlertController()
+        alert.create(title: "No Image",
+                     message: "Please load an image..")
+        self.present(alert, animated: true, completion: nil)
+        return false
+      }
       gameSize.resignFirstResponder()
-      gameSize.isHidden = true
-      gameCollectionView.isHidden = false
-      board = Board.init(size:size)
-      board?.delegate = self
-      gameCollectionView.reloadData()
-      solveButton.isHidden = false
-      self.solveButton.setTitle("Solve", for: UIControlState.normal)
-      board!.trySolving()
+      progress.isHidden = false
+      stack.isHidden = true
+      progress.startAnimating()
+      DispatchQueue.main.async {
+        self.board = Board.init(size:size, image:self.imageRef!)
+        self.gameCollectionView.isHidden = false
+        self.board?.delegate = self
+        self.gameCollectionView.reloadData()
+        self.solveButton.isHidden = false
+        self.solveButton.setTitle("Solve", for: UIControlState.normal)
+        self.board!.trySolving()
+      }
       return true
     }
     
     let alert = UIAlertController()
     alert.create(title: "Wrong board size",
-                 message: "Please enter a number that is greater than 1")
+                 message: "Please enter a number that is between 1 and 11")
     self.present(alert, animated: true, completion: nil)
     
     return false
@@ -174,6 +228,7 @@ extension GameVC: UITextFieldDelegate {
 extension GameVC: SwapDelegate {
   func swapOccurred(at: IndexPath, with: IndexPath) {
     self.board?.swap(at: at, with: with)
+    board?.solution = (result:false, path:[])
   }
 }
 
@@ -187,9 +242,24 @@ extension GameVC: BoardDelegate {
   func updateLabel() {
     DispatchQueue.main.async {
       self.solving = false
-      self.board?.stop()
       DispatchQueue.main.async {
         self.solveButton.isHidden = true
+      }
+    }
+  }
+}
+
+extension GameVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    picker.dismiss(animated: true, completion: nil);
+    DispatchQueue.main.async {
+      if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        self.imageRef = image
+        self.imageLoaded = true
+        self.imageButton.isHidden = true
+        self.imageView.image = image
+        self.imageView.isHidden = false
+        self.textFieldShouldReturn(self.gameSize)
       }
     }
   }

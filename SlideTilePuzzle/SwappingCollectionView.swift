@@ -39,7 +39,7 @@ class SwappingCollectionView: UICollectionView {
   
   var interactiveIndexPath : NSIndexPath?
   var interactiveView : UIView?
-  var interactiveCell : UICollectionViewCell?
+  var interactiveCell : SlideCell?
   var swapSet : Set<SwapDescription> = Set()
   var previousPoint : CGPoint?
   var swapDelegate:SwapDelegate?
@@ -50,7 +50,8 @@ class SwappingCollectionView: UICollectionView {
     
     self.interactiveIndexPath = indexPath as NSIndexPath
     
-    self.interactiveCell = self.cellForItem(at: indexPath)
+    self.interactiveCell = self.cellForItem(at: indexPath) as? SlideCell
+    self.interactiveCell?.selectCell()
     
     self.interactiveView = UIImageView(image: self.interactiveCell?.snapshot())
     self.interactiveView?.frame = self.interactiveCell!.frame
@@ -118,6 +119,7 @@ class SwappingCollectionView: UICollectionView {
     self.interactiveCell?.isHidden = false
     self.interactiveView?.removeFromSuperview()
     self.interactiveView = nil
+    self.interactiveCell?.deselectCell()
     self.interactiveCell = nil
     self.interactiveIndexPath = nil
     self.previousPoint = nil

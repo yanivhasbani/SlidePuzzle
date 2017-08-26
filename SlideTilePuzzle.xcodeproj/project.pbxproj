@@ -17,9 +17,10 @@
 		7988AC671F3DA7B800588CD3 /* SlideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC661F3DA7B800588CD3 /* SlideCell.swift */; };
 		7988AC6C1F3DA9F500588CD3 /* UIAlertController+MyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC6B1F3DA9F500588CD3 /* UIAlertController+MyAlert.swift */; };
 		7988AC6F1F3DB94400588CD3 /* board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC6E1F3DB94400588CD3 /* board.swift */; };
-		7988AC721F3DBD3900588CD3 /* ShuffledCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988AC711F3DBD3900588CD3 /* ShuffledCollection.swift */; };
 		79D176E11F3DE8B1000D2A80 /* SwappingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D176E01F3DE8B1000D2A80 /* SwappingCollectionView.swift */; };
 		79D176E31F4039C9000D2A80 /* Array+BoardMoves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D176E21F4039C9000D2A80 /* Array+BoardMoves.swift */; };
+		D6C741FD1F4EF4110061E20A /* MyBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C741FC1F4EF4110061E20A /* MyBoard.swift */; };
+		D6C741FF1F4F14140061E20A /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C741FE1F4F14140061E20A /* Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +57,10 @@
 		7988AC661F3DA7B800588CD3 /* SlideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideCell.swift; sourceTree = "<group>"; };
 		7988AC6B1F3DA9F500588CD3 /* UIAlertController+MyAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+MyAlert.swift"; sourceTree = "<group>"; };
 		7988AC6E1F3DB94400588CD3 /* board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = board.swift; sourceTree = "<group>"; };
-		7988AC711F3DBD3900588CD3 /* ShuffledCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffledCollection.swift; sourceTree = "<group>"; };
 		79D176E01F3DE8B1000D2A80 /* SwappingCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwappingCollectionView.swift; sourceTree = "<group>"; };
 		79D176E21F4039C9000D2A80 /* Array+BoardMoves.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+BoardMoves.swift"; sourceTree = "<group>"; };
+		D6C741FC1F4EF4110061E20A /* MyBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBoard.swift; sourceTree = "<group>"; };
+		D6C741FE1F4F14140061E20A /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				7988AC6E1F3DB94400588CD3 /* board.swift */,
+				D6C741FC1F4EF4110061E20A /* MyBoard.swift */,
+				D6C741FE1F4F14140061E20A /* Image.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -177,7 +181,6 @@
 		7988AC701F3DBCE900588CD3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7988AC711F3DBD3900588CD3 /* ShuffledCollection.swift */,
 				79D176E21F4039C9000D2A80 /* Array+BoardMoves.swift */,
 			);
 			name = Extensions;
@@ -251,7 +254,7 @@
 				TargetAttributes = {
 					7988AC321F3DA6E700588CD3 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 95GPBW627H;
+						DevelopmentTeam = 6EQ2C96FBY;
 						ProvisioningStyle = Automatic;
 					};
 					7988AC461F3DA6E700588CD3 = {
@@ -320,8 +323,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7988AC721F3DBD3900588CD3 /* ShuffledCollection.swift in Sources */,
 				7988AC391F3DA6E700588CD3 /* GameVC.swift in Sources */,
+				D6C741FF1F4F14140061E20A /* Image.swift in Sources */,
+				D6C741FD1F4EF4110061E20A /* MyBoard.swift in Sources */,
 				7988AC6F1F3DB94400588CD3 /* board.swift in Sources */,
 				7988AC6C1F3DA9F500588CD3 /* UIAlertController+MyAlert.swift in Sources */,
 				7988AC671F3DA7B800588CD3 /* SlideCell.swift in Sources */,
@@ -481,12 +485,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 95GPBW627H;
+				DEVELOPMENT_TEAM = 6EQ2C96FBY;
 				INFOPLIST_FILE = SlideTilePuzzle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = swiftTut.SlideTilePuzzle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanivcorp.slidetilepuzzle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -494,12 +499,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 95GPBW627H;
+				DEVELOPMENT_TEAM = 6EQ2C96FBY;
 				INFOPLIST_FILE = SlideTilePuzzle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = swiftTut.SlideTilePuzzle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanivcorp.slidetilepuzzle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
