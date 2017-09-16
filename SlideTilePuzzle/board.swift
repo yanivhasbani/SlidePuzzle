@@ -47,14 +47,16 @@ class Board: NSObject {
   
   var delegate: BoardDelegate?
   
-  init(size:Int, image:UIImage) {
+  init(size:Int, image:UIImage?) {
     rowSize = size
     solvedModel = (1...Int(pow(Double(size), 2)-1)).map({$0})
     model.model = solvedModel
     model.model.append(-1)
     model.emptyIndex = solvedModel.count
     model.model = model.shuffle()!
-    Image.shared.shuffle(model: model.model, imageRef:image)
+    if image != nil {
+         Image.shared.shuffle(model: model.model, imageRef:image!)
+    }
     currentlyShowing = model.createBoard()
     Utils.shared.shuffled.solving = true
     Utils.shared.shuffled.lastValidMove = ""

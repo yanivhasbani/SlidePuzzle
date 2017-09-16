@@ -18,6 +18,7 @@ class GameVC: UIViewController, UIGestureRecognizerDelegate {
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var progress: UIActivityIndicatorView!
   
+  var uiType:Int = 0
   var board:Board?
   var solving:Bool?
   var imageLoaded:Bool = false
@@ -25,6 +26,10 @@ class GameVC: UIViewController, UIGestureRecognizerDelegate {
   var imageRef:UIImage?
   
   override func viewDidLoad() {
+    if uiType == 1 {
+      imageButton.isHidden = true
+    }
+    
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     gameSize.delegate = self
@@ -191,8 +196,8 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
 extension GameVC: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if let text = gameSize.text, text.characters.count > 0,
-      let size = Int(text) , size > 1, size < 12{
-      if !imageLoaded {
+      let size = Int(text) , (uiType == 1 && size > 1) || (uiType == 0 && size > 1 && size < 6) {
+      if uiType == 0, !imageLoaded {
         gameSize.resignFirstResponder()
         let alert = UIAlertController()
         alert.create(title: "No Image",
@@ -205,7 +210,7 @@ extension GameVC: UITextFieldDelegate {
       stack.isHidden = true
       progress.startAnimating()
       DispatchQueue.main.async {
-        self.board = Board.init(size:size, image:self.imageRef!)
+        self.board = Board.init(size:size, image:self.imageRef)
         self.gameCollectionView.isHidden = false
         self.board?.delegate = self
         self.gameCollectionView.reloadData()
@@ -216,10 +221,18 @@ extension GameVC: UITextFieldDelegate {
       return true
     }
     
-    let alert = UIAlertController()
-    alert.create(title: "Wrong board size",
-                 message: "Please enter a number that is between 1 and 11")
-    self.present(alert, animated: true, completion: nil)
+    if uiType == 0 {
+      let alert = UIAlertController()
+      alert.create(title: "Wrong board size",
+                   message: "Please enter a number that is between 1 and 6")
+      self.present(alert, animated: true, completion: nil)
+    } else {
+      let alert = UIAlertController()
+      alert.create(title: "Wrong board size",
+                   message: "Please enter a number that is bigger than 1")
+      self.present(alert, animated: true, completion: nil)
+    }
+    
     
     return false
   }

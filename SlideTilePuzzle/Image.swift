@@ -31,8 +31,6 @@ extension UIImage {
     rotatedImage = rotatedImage.cropping(to: drawRect)!
     let resultImage = UIImage(cgImage: rotatedImage)
     return resultImage
-    
-    
   }
 }
 
@@ -74,23 +72,27 @@ class Image {
     var adjustedHeight = tileHeight
     
     var y = 0
-    for row in 0 ..< howMany {
-      if row == (howMany - 1) {
-        adjustedHeight = Int(height) - y
-      }
-      var adjustedWidth = tileWidth
-      var x = 0
-      for column in 0 ..< howMany {
-        if column == (howMany - 1) {
-          adjustedWidth = Int(width) - x
+    autoreleasepool {
+      for row in 0 ..< howMany {
+        if row == (howMany - 1) {
+          adjustedHeight = Int(height) - y
         }
-        let origin = CGPoint(x: x * scale, y: y * scale)
-        let size = CGSize(width: adjustedWidth * scale, height: adjustedHeight * scale)
-        let tileCgImage = cgImage.cropping(to: CGRect(origin: origin, size: size))!
-        images.append(UIImage(cgImage: tileCgImage, scale: image.scale, orientation: image.imageOrientation))
-        x += tileWidth
+        var adjustedWidth = tileWidth
+        var x = 0
+        for column in 0 ..< howMany {
+          autoreleasepool {
+            if column == (howMany - 1) {
+              adjustedWidth = Int(width) - x
+            }
+            let origin = CGPoint(x: x * scale, y: y * scale)
+            let size = CGSize(width: adjustedWidth * scale, height: adjustedHeight * scale)
+            let tileCgImage = cgImage.cropping(to: CGRect(origin: origin, size: size))
+            images.append(UIImage(cgImage: tileCgImage!, scale: image.scale, orientation: image.imageOrientation))
+            x += tileWidth
+          }
+        }
+        y += tileHeight
       }
-      y += tileHeight
     }
     return images
     

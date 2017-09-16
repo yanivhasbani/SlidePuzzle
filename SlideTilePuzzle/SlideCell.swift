@@ -17,11 +17,18 @@ class SlideCell: UICollectionViewCell {
     if number == "-1" {
       label.text = ""
       image.image = nil
+      backgroundColor = UIColor.yellow
     } else {
       label.text = String(number)
-      if let num = Int(number) {
-          let x = Image.shared.images
-          image.image = x[num-1]
+      if let num = Int(number),
+        Image.shared.images.count >= num {
+          image.image = Image.shared.images[num-1]
+      } else {
+        image.isHidden = true
+        label.isHidden = false
+      }
+      if backgroundColor == UIColor.yellow {
+        backgroundColor = UIColor.blue
       }
     }
   }

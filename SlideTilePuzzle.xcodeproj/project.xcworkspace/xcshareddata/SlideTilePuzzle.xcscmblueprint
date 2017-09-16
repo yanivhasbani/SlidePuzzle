@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A29E2A0B90B82510EFB4FD21C1E186DC8D1AD345",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0F364CEAA0B10797615322600B8F60F927B4B107" : 9223372036854775807,
+    "A29E2A0B90B82510EFB4FD21C1E186DC8D1AD345" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "60705CA4-428C-47AA-B0B2-830E207F2129",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0F364CEAA0B10797615322600B8F60F927B4B107" : "TechnionRobotController\/",
+    "A29E2A0B90B82510EFB4FD21C1E186DC8D1AD345" : "SlidePuzzle\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "SlideTilePuzzle",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SlideTilePuzzle.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yanivhasbani\/TechnionRobotController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0F364CEAA0B10797615322600B8F60F927B4B107"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yanivhasbani\/SlidePuzzle.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A29E2A0B90B82510EFB4FD21C1E186DC8D1AD345"
+    }
+  ]
+}
